@@ -1,4 +1,4 @@
-package com.kavi.droid.color.picker
+package com.kavi.droid.color.picker.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kavi.droid.color.picker.ui.pickers.KvColorPicker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -42,17 +43,6 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                 modifier = Modifier
                     .fillMaxWidth().padding(start = 16.dp, end = 16.dp),
                 fontSize = 32.sp
-            )
-
-            Text(
-                text ="By dragging \'RED\', \'GREEN\', and \'BLUE\' bars below, you can select " +
-                        "or generate your color you want exactly, or type your color\'s hex and set it.",
-                textAlign = TextAlign.Start,
-                modifier = Modifier
-                    .fillMaxWidth().padding(top = 4.dp, start = 16.dp, end = 16.dp),
-                color = Color.Gray,
-                style = MaterialTheme.typography.bodySmall,
-                fontSize = 10.sp
             )
 
             KvColorPicker(
