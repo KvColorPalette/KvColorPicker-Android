@@ -28,7 +28,7 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.kavi.droid.color.palette.app.extension.toColorInt
+import com.kavi.droid.color.picker.extension.toColorInt
 
 /**
  * A composable function that creates a slider for adjusting a float value associated with a color.
