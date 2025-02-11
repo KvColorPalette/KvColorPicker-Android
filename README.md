@@ -5,7 +5,7 @@ But developers can use individual peaces available in the library as per their r
 
 # Features
 * Color Picker BottomSheet
-* Picker from RGB-A values.
+* Picker from RGB-A values
 
 # Installation
 Add following in your root `build.gradle`/`build.gradle.kts` at the end of repositories:
