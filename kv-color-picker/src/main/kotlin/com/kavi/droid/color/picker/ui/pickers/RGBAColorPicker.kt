@@ -32,7 +32,7 @@ import com.kavi.droid.color.picker.ui.common.ColorSlider
 import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 
 @Composable
-fun KvColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
+fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
     // State variables for RGB-A values
     val red = rememberSaveable { mutableFloatStateOf(0f) }
     val green = rememberSaveable { mutableFloatStateOf(0f) }
@@ -99,5 +99,5 @@ fun KvColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor
 @Preview(showBackground = true)
 @Composable
 fun ColorPickerUIPreview() {
-    KvColorPicker(onColorSelected = {})
+    RGBAColorPicker(onColorSelected = {})
 }

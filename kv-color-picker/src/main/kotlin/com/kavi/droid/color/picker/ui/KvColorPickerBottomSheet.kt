@@ -22,7 +22,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kavi.droid.color.picker.ui.pickers.KvColorPicker
+import com.kavi.droid.color.picker.ui.pickers.GridColorPicker
+import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +45,14 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                 fontSize = 32.sp
             )
 
-            KvColorPicker(
+            /*RGBAColorPicker(
+                modifier = Modifier.padding(16.dp),
+                onColorSelected = {
+                    selectedColor = it
+                }
+            )*/
+
+            GridColorPicker(
                 modifier = Modifier.padding(16.dp),
                 onColorSelected = {
                     selectedColor = it
