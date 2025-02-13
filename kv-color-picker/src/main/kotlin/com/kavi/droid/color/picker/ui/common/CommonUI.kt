@@ -148,7 +148,7 @@ fun SelectedColorDetail(
         ) {
             Box(
                 modifier = Modifier
-                    .padding(12.dp)
+                    .padding(start = 12.dp, end = 12.dp, top = 22.dp, bottom = 12.dp)
                     .height(75.dp)
                     .width(75.dp)
                     .background(color, shape = MaterialTheme.shapes.large)
@@ -221,8 +221,8 @@ fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color: Color) 
 
     Box(
         modifier = Modifier
-            .width(26.dp)
-            .height(26.dp)
+            .width(22.dp)
+            .height(22.dp)
             .background(givenColor, RectangleShape)
             .clickable {
                 isSelected = true

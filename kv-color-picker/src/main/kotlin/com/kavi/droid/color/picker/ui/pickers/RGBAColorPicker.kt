@@ -66,7 +66,7 @@ fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
     ) {
         Text(
             text ="By dragging \'RED\', \'GREEN\', and \'BLUE\' bars below, you can select " +
-                    "or generate your color you want exactly, or type your color\'s hex and set it.",
+                    "or generate your color you want exactly.",
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 12.dp),
