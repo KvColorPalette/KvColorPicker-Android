@@ -221,8 +221,8 @@ fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color: Color) 
 
     Box(
         modifier = Modifier
-            .width(22.dp)
-            .height(22.dp)
+            .width(24.dp)
+            .height(24.dp)
             .background(givenColor, RectangleShape)
             .clickable {
                 isSelected = true
