@@ -23,13 +23,13 @@ Add the following dependency to your `build.gradle` / `build.gradle.kts` file:
 For Groovy - `build.gradle`:
 ````
 dependencies {
-    implementation 'com.github.KvColorPalette:KvColorPicker-Android:0.1.0'
+    implementation 'com.github.KvColorPalette:KvColorPicker-Android:0.0.2'
 }
 ````
 For Kotlin DSL - `build.gradle.kts`:
 ````
 dependencies {
-    implementation("com.github.KvColorPalette:KvColorPicker-Android:0.1.0")
+    implementation("com.github.KvColorPalette:KvColorPicker-Android:0.0.2")
 }
 ````
 
