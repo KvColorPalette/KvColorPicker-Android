@@ -5,7 +5,8 @@ But developers can use individual peaces available in the library as per their r
 
 # Features
 * Color Picker BottomSheet
-* Picker from RGB-A values
+* Pick color from RGB-A values
+* Pick color from Predefined color grid
 
 # Installation
 Add following in your root `build.gradle`/`build.gradle.kts` at the end of repositories:
@@ -22,13 +23,13 @@ Add the following dependency to your `build.gradle` / `build.gradle.kts` file:
 For Groovy - `build.gradle`:
 ````
 dependencies {
-    implementation 'com.github.KvColorPalette:KvColorPicker-Android:0.0.1'
+    implementation 'com.github.KvColorPalette:KvColorPicker-Android:0.1.0'
 }
 ````
 For Kotlin DSL - `build.gradle.kts`:
 ````
 dependencies {
-    implementation("com.github.KvColorPalette:KvColorPicker-Android:0.0.1")
+    implementation("com.github.KvColorPalette:KvColorPicker-Android:0.1.0")
 }
 ````
 
