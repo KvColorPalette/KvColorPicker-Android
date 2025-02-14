@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -32,7 +33,7 @@ import com.kavi.droid.color.picker.ui.common.ColorSlider
 import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 
 @Composable
-fun KvColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
+fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
     // State variables for RGB-A values
     val red = rememberSaveable { mutableFloatStateOf(0f) }
     val green = rememberSaveable { mutableFloatStateOf(0f) }
@@ -54,43 +55,56 @@ fun KvColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor
         onColorSelected.invoke(color)
     }
 
-    Column (
-        modifier = modifier
-            .border(1.dp, Color.White, shape = RoundedCornerShape(8.dp))
-            .shadow(
-                elevation = 10.dp,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .background(Color.White)
-            .padding(12.dp)
-    ) {
-        Text(
-            text ="By dragging \'RED\', \'GREEN\', and \'BLUE\' bars below, you can select " +
-                    "or generate your color you want exactly, or type your color\'s hex and set it.",
-            textAlign = TextAlign.Start,
+    Column (modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column (
             modifier = Modifier
-                .fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 12.dp),
-            color = Color.Gray,
-            style = MaterialTheme.typography.bodySmall,
-            fontSize = 12.sp
-        )
-
-        Row {
-            // Sliders for adjusting RGB-A values
-            Column(
+                .border(1.dp, Color.White, shape = RoundedCornerShape(8.dp))
+                .shadow(
+                    elevation = 10.dp,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .background(Color.White)
+                .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
+        ) {
+            Text(
+                text ="By dragging \'RED\', \'GREEN\', and \'BLUE\' bars below, you can select " +
+                        "or generate your color you want exactly.",
+                textAlign = TextAlign.Start,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(12.dp),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
-            ) {
-                ColorSlider("RED", red, Color.Red)
-                ColorSlider("GREEN", green, Color.Green)
-                ColorSlider("BLUE", blue, Color.Blue)
-                AlphaSlider(alpha, color)
+                    .fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 12.dp),
+                color = Color.Gray,
+                style = MaterialTheme.typography.bodySmall,
+                fontSize = 12.sp
+            )
+
+            Row {
+                // Sliders for adjusting RGB-A values
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    ColorSlider("RED", red, Color.Red)
+                    ColorSlider("GREEN", green, Color.Green)
+                    ColorSlider("BLUE", blue, Color.Blue)
+                    AlphaSlider(alpha, color)
+                }
             }
         }
 
-        SelectedColorDetail(color = color, colorHex = colorHex)
+        Column (
+            modifier = Modifier
+                .border(1.dp, Color.White, shape = RoundedCornerShape(8.dp))
+                .shadow(
+                    elevation = 10.dp,
+                    shape = RoundedCornerShape(8.dp)
+                )
+                .background(Color.White)
+                .padding(start = 12.dp, end = 12.dp)
+        ) {
+            SelectedColorDetail(color = color, colorHex = colorHex)
+        }
     }
 }
 
@@ -99,5 +113,5 @@ fun KvColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor
 @Preview(showBackground = true)
 @Composable
 fun ColorPickerUIPreview() {
-    KvColorPicker(onColorSelected = {})
+    RGBAColorPicker(onColorSelected = {})
 }

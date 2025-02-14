@@ -3,6 +3,7 @@ package com.kavi.droid.color.picker.ui.common
 import android.icu.text.DecimalFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,13 +22,21 @@ import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.kavi.droid.color.palette.KvColorPalette
+import com.kavi.droid.color.palette.model.KvColor
+import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.extension.toColorInt
 
 /**
@@ -139,7 +148,7 @@ fun SelectedColorDetail(
         ) {
             Box(
                 modifier = Modifier
-                    .padding(12.dp)
+                    .padding(start = 12.dp, end = 12.dp, top = 22.dp, bottom = 12.dp)
                     .height(75.dp)
                     .width(75.dp)
                     .background(color, shape = MaterialTheme.shapes.large)
@@ -190,4 +199,35 @@ fun SelectedColorDetail(
             }
         }
     }
+}
+
+@Composable
+fun ColorColum(givenColor: KvColor, selectedColor: Color, onSelect: (color: Color) -> Unit) {
+    val colors = KvColorPalette.instance.generateColorPalette(givenColor = givenColor)
+    Column {
+        colors.forEach {
+            ColorBox(givenColor = it, selectedColor = selectedColor, onSelect = onSelect)
+        }
+    }
+}
+
+@Composable
+fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color: Color) -> Unit) {
+    var isSelected by remember { mutableStateOf(false) }
+
+    selectedColor?.let {
+        isSelected = ColorUtil.getHexWithAlpha(givenColor) == ColorUtil.getHexWithAlpha(it)
+    }
+
+    Box(
+        modifier = Modifier
+            .width(24.dp)
+            .height(24.dp)
+            .background(givenColor, RectangleShape)
+            .clickable {
+                isSelected = true
+                onSelect(givenColor)
+            }
+            .then(if (isSelected) Modifier.border(2.dp, Color.White) else Modifier)
+    )
 }

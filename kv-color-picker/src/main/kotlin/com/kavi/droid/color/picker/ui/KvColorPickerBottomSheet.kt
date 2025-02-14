@@ -10,6 +10,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SheetState
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -22,7 +24,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.kavi.droid.color.picker.ui.pickers.KvColorPicker
+import com.kavi.droid.color.picker.ui.pickers.GridColorPicker
+import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,6 +38,8 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
     ) {
         Column {
             var selectedColor by remember { mutableStateOf(Color.Black) }
+            var tabIndex by remember { mutableStateOf(0) }
+            val tabs = listOf("RGB", "GRID")
 
             Text(
                 text ="Pick you color",
@@ -44,12 +49,32 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                 fontSize = 32.sp
             )
 
-            KvColorPicker(
-                modifier = Modifier.padding(16.dp),
-                onColorSelected = {
-                    selectedColor = it
+            TabRow(
+                modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 8.dp),
+                selectedTabIndex = tabIndex
+            ) {
+                tabs.forEachIndexed { index, title ->
+                    Tab(
+                        text = { Text(title) },
+                        selected = tabIndex == index,
+                        onClick = { tabIndex = index }
+                    )
                 }
-            )
+            }
+            when(tabIndex) {
+                0 -> RGBAColorPicker(
+                    modifier = Modifier.padding(16.dp),
+                    onColorSelected = {
+                        selectedColor = it
+                    }
+                )
+                1 -> GridColorPicker(
+                    modifier = Modifier.padding(16.dp),
+                    onColorSelected = {
+                        selectedColor = it
+                    }
+                )
+            }
 
             Row (
                 modifier = Modifier
