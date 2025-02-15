@@ -20,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -32,6 +31,16 @@ import com.kavi.droid.color.picker.ui.common.AlphaSlider
 import com.kavi.droid.color.picker.ui.common.ColorSlider
 import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 
+/**
+ * A composable function that creates a color picker UI for selecting RGB-A colors. This component
+ * contain 3 sliders for adjusting the red, green, and blue values of the color and another slider to adjust the alpha value.
+ * By adjusting these values, consumer can select or generate your desired color.
+ *
+ * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
+ *
+ * @return @Composable: A color picker UI for selecting RGB-A colors.
+ */
 @Composable
 fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
     // State variables for RGB-A values
@@ -106,12 +115,4 @@ fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
             SelectedColorDetail(color = color, colorHex = colorHex)
         }
     }
-}
-
-
-
-@Preview(showBackground = true)
-@Composable
-fun ColorPickerUIPreview() {
-    RGBAColorPicker(onColorSelected = {})
 }
