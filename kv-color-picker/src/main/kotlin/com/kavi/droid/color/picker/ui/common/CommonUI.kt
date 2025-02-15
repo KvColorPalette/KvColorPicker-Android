@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
@@ -42,18 +41,16 @@ import com.kavi.droid.color.picker.extension.toColorInt
 /**
  * A composable function that creates a slider for adjusting a float value associated with a color.
  *
- * @param label The label to display alongside the slider.
- * @param valueState The mutable state holding the current value of the slider.
- * @param color The color used for the active track of the slider.
+ * @param colorLabel: String: The label to display alongside the slider.
+ * @param colorValueState: MutableState<Float>: The mutable state holding the current color value of the slider.
+ * @param color: Color: The color used for the active track of the slider.
+ *
+ * @return @Composable: A slider UI for color selection.
  */
 @Composable
-fun ColorSlider(
-    label: String,
-    valueState: MutableState<Float>,
-    color: Color,
-) {
+internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float>, color: Color) {
     /**
-     * Displays a slider for adjusting the given [valueState] associated with the provided [label].
+     * Displays a slider for adjusting the given [colorValueState] associated with the provided [colorLabel].
      * The slider's active track color is set to [color].
      */
     Row(
@@ -61,13 +58,13 @@ fun ColorSlider(
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         Text(
-            text = label,
+            text = colorLabel,
             color = Color.Black,
             modifier = Modifier.weight(.2f)
         )
         Slider(
-            value = valueState.value,
-            onValueChange = valueState.component2(),
+            value = colorValueState.value,
+            onValueChange = colorValueState.component2(),
             colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = color
@@ -75,7 +72,7 @@ fun ColorSlider(
             modifier = Modifier.weight(.8f)
         )
         Text(
-            text = valueState.value.toColorInt().toString(),
+            text = colorValueState.value.toColorInt().toString(),
             modifier = Modifier
                 .width(25.dp)
                 .weight(.1f),
@@ -89,17 +86,15 @@ fun ColorSlider(
 /**
  * A composable function that creates a slider for adjusting a float value associated with a color alpha valuw.
  *
- * @param valueState The mutable state holding the current value of the slider.
- * @param color The color used for the active track of the slider.
+ * @param alphaValueState: MutableState<Float>: The mutable state holding the current value of the slider.
+ * @param color: Color: The color used for the active track of the slider.
+ *
+ * @return @Composable: A slider UI for alpha selection.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AlphaSlider(
-    valueState: MutableState<Float>,
-    color: Color
-) {
+internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
     /**
-     * Displays a slider for adjusting the given [valueState].
+     * Displays a slider for adjusting the given [alphaValueState].
      * The slider's active track color is set to [color].
      */
     Row(
@@ -112,8 +107,8 @@ fun AlphaSlider(
             modifier = Modifier.weight(.2f)
         )
         Slider(
-            value = valueState.value,
-            onValueChange = valueState.component2(),
+            value = alphaValueState.value,
+            onValueChange = alphaValueState.component2(),
             colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = color
@@ -122,7 +117,7 @@ fun AlphaSlider(
             modifier = Modifier.weight(.8f),
         )
         Text(
-            text = DecimalFormat("#.##").format(valueState.value).toString(),
+            text = DecimalFormat("#.##").format(alphaValueState.value).toString(),
             modifier = Modifier
                 .width(25.dp)
                 .weight(.1f),
@@ -133,11 +128,16 @@ fun AlphaSlider(
     }
 }
 
+/**
+ * A composable function that displays the selected color and its details.
+ *
+ * @param color: Color: The selected color to display.
+ * @param colorHex: MutableState<TextFieldValue>: The mutable state holding the current color hex value.
+ *
+ * @return @Composable: A UI to display selected color and its details.
+ */
 @Composable
-fun SelectedColorDetail(
-    color: Color,
-    colorHex: MutableState<TextFieldValue>
-) {
+internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldValue>) {
     // Retrieve a ClipboardManager object
     val clipboardManager = LocalClipboardManager.current
 
@@ -201,8 +201,15 @@ fun SelectedColorDetail(
     }
 }
 
+/**
+ * A composable function that displays a color colum with predefined colors.
+ *
+ * @param givenColor: KvColor: The color to generate color palette. This is from [KvColorPalette]
+ * @param selectedColor: Color: The selected color to highlight.
+ * @param onSelect: (color: Color) -> Unit: Callback to invoke when a color is selected.
+ */
 @Composable
-fun ColorColum(givenColor: KvColor, selectedColor: Color, onSelect: (color: Color) -> Unit) {
+internal fun ColorColum(givenColor: KvColor, selectedColor: Color, onSelect: (color: Color) -> Unit) {
     val colors = KvColorPalette.instance.generateColorPalette(givenColor = givenColor)
     Column {
         colors.forEach {
@@ -211,8 +218,15 @@ fun ColorColum(givenColor: KvColor, selectedColor: Color, onSelect: (color: Colo
     }
 }
 
+/**
+ * A composable function that displays a single color box.
+ *
+ * @param givenColor: Color: The color to display.
+ * @param selectedColor: Color: The selected color to highlight.
+ * @param onSelect: (color: Color) -> Unit: Callback to invoke when a color is selected.
+ */
 @Composable
-fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color: Color) -> Unit) {
+internal fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color: Color) -> Unit) {
     var isSelected by remember { mutableStateOf(false) }
 
     selectedColor?.let {

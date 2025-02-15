@@ -29,6 +29,15 @@ import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.ui.common.ColorColum
 import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 
+/**
+ * A composable function that creates a grid grid to select colors. This color grid is created with
+ * 16 predefined major colors and those color's 10 color variances.
+ *
+ * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
+ *
+ * @return @Composable: A grid UI to select colors.
+ */
 @Composable
 fun GridColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
 
@@ -164,5 +173,4 @@ fun GridColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
             SelectedColorDetail(color = selectedColor, colorHex = colorHex)
         }
     }
-
 }
