@@ -53,7 +53,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
         Column {
             var selectedColor by remember { mutableStateOf(Color.Black) }
             var tabIndex by remember { mutableIntStateOf(0) }
-            val tabs = listOf("RGB", "GRID")
+            val tabs = listOf("RGB-A", "GRID")
 
             Text(
                 text ="Pick you color",
