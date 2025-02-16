@@ -1,17 +1,22 @@
 package com.kavi.droid.color.picker.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -65,13 +70,30 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
 
             TabRow(
                 modifier = Modifier.padding(start = 12.dp, end = 12.dp, top = 8.dp),
-                selectedTabIndex = tabIndex
+                selectedTabIndex = tabIndex,
+                containerColor = Color.Transparent,
+                indicator = { tabPositions ->
+                    TabRowDefaults.PrimaryIndicator(
+                        modifier = Modifier
+                            .tabIndicatorOffset(tabPositions[tabIndex]),
+                        color = MaterialTheme.colorScheme.secondary,
+                        width = 150.dp
+                    )
+                }
             ) {
                 tabs.forEachIndexed { index, title ->
                     Tab(
-                        text = { Text(title) },
+                        text = {
+                            Text(
+                                text = title,
+                                color = MaterialTheme.colorScheme.secondary,
+                                style = MaterialTheme.typography.bodySmall,
+                                fontSize = 12.sp
+                            )
+                        },
                         selected = tabIndex == index,
-                        onClick = { tabIndex = index }
+                        onClick = { tabIndex = index },
+                        selectedContentColor = MaterialTheme.colorScheme.secondary,
                     )
                 }
             }
@@ -104,7 +126,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                         showSheet.value = false
                     }
                 ) {
-                    Text("Close")
+                    Text(text = "Close", color = MaterialTheme.colorScheme.secondary)
                 }
 
                 Button(
@@ -117,7 +139,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                         onColorSelected.invoke(selectedColor)
                     }
                 ) {
-                    Text("Select")
+                    Text(text = "Select", color = MaterialTheme.colorScheme.onPrimary)
                 }
             }
         }
