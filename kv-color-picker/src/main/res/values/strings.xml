@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label.close">CLOSE</string>
+    <string name="label.select">SELECT</string>
+    <string name="label.rgba">RGB-A</string>
+    <string name="label.grid">GRID</string>
+    <string name="title.pick.color">Pick your Color</string>
+</resources>

@@ -27,9 +27,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.pickers.GridColorPicker
 import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
 
@@ -58,10 +60,13 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
         Column {
             var selectedColor by remember { mutableStateOf(Color.Black) }
             var tabIndex by remember { mutableIntStateOf(0) }
-            val tabs = listOf("RGB-A", "GRID")
+            val tabs = listOf(
+                stringResource(R.string.label_rgba),
+                stringResource(R.string.label_grid)
+            )
 
             Text(
-                text ="Pick you color",
+                text = stringResource(R.string.title_pick_color),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .fillMaxWidth().padding(start = 16.dp, end = 16.dp),
@@ -126,7 +131,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                         showSheet.value = false
                     }
                 ) {
-                    Text(text = "Close", color = MaterialTheme.colorScheme.secondary)
+                    Text(text = stringResource(R.string.label_close), color = MaterialTheme.colorScheme.secondary)
                 }
 
                 Button(
@@ -139,7 +144,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                         onColorSelected.invoke(selectedColor)
                     }
                 ) {
-                    Text(text = "Select", color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = stringResource(R.string.label_select), color = MaterialTheme.colorScheme.onPrimary)
                 }
             }
         }
