@@ -159,18 +159,5 @@ fun GridColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                 )
             }
         }
-
-        Column(
-            modifier = Modifier
-                .border(1.dp, Color.White, shape = RoundedCornerShape(8.dp))
-                .shadow(
-                    elevation = 10.dp,
-                    shape = RoundedCornerShape(8.dp)
-                )
-                .background(Color.White)
-                .padding(start = 12.dp, end = 12.dp)
-        ) {
-            SelectedColorDetail(color = selectedColor, colorHex = colorHex)
-        }
     }
 }
