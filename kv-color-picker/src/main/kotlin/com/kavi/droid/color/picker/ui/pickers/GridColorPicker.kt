@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.color.MatPackage
 import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.ui.common.ColorColum
-import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 
 /**
  * A composable function that creates a grid grid to select colors. This color grid is created with
