@@ -1,5 +1,7 @@
 package com.kavi.droid.color.picker.ui
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,12 +26,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
+import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 import com.kavi.droid.color.picker.ui.pickers.GridColorPicker
 import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
 
@@ -57,6 +63,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
     ) {
         Column {
             var selectedColor by remember { mutableStateOf(Color.Black) }
+            val colorHex = remember { mutableStateOf(TextFieldValue("#000000")) }
             var tabIndex by remember { mutableIntStateOf(0) }
             val tabs = listOf(
                 stringResource(R.string.label_rgba),
@@ -105,44 +112,60 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                     modifier = Modifier.padding(16.dp),
                     onColorSelected = {
                         selectedColor = it
+                        colorHex.value = TextFieldValue(ColorUtil.getHex(it))
                     }
                 )
                 1 -> GridColorPicker(
                     modifier = Modifier.padding(16.dp),
                     onColorSelected = {
                         selectedColor = it
+                        colorHex.value = TextFieldValue(ColorUtil.getHex(it))
                     }
                 )
             }
 
-            Row (
+            Column (
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 4.dp),
+                    .padding(start = 16.dp, end = 16.dp, bottom = 12.dp)
+                    .border(1.dp, Color.White, shape = RoundedCornerShape(8.dp))
+                    .shadow(
+                        elevation = 10.dp,
+                        shape = RoundedCornerShape(8.dp)
+                    )
+                    .background(Color.White)
+                    .padding(start = 12.dp, end = 12.dp)
             ) {
-                OutlinedButton (
-                    modifier = Modifier
-                        .padding(start = 4.dp, end = 4.dp)
-                        .weight(1f),
-                    shape = RoundedCornerShape(8.dp),
-                    onClick = {
-                        showSheet.value = false
-                    }
-                ) {
-                    Text(text = stringResource(R.string.label_close), color = MaterialTheme.colorScheme.secondary)
-                }
+                SelectedColorDetail(color = selectedColor, colorHex = colorHex)
 
-                Button(
+                Row (
                     modifier = Modifier
-                        .padding(start = 4.dp, end = 4.dp)
-                        .weight(1f),
-                    shape = RoundedCornerShape(8.dp),
-                    onClick = {
-                        showSheet.value = false
-                        onColorSelected.invoke(selectedColor)
-                    }
+                        .fillMaxWidth()
+                        .padding(bottom = 12.dp),
                 ) {
-                    Text(text = stringResource(R.string.label_select), color = MaterialTheme.colorScheme.onPrimary)
+                    OutlinedButton (
+                        modifier = Modifier
+                            .padding(start = 4.dp, end = 4.dp)
+                            .weight(1f),
+                        shape = RoundedCornerShape(8.dp),
+                        onClick = {
+                            showSheet.value = false
+                        }
+                    ) {
+                        Text(text = stringResource(R.string.label_close), color = MaterialTheme.colorScheme.secondary)
+                    }
+
+                    Button(
+                        modifier = Modifier
+                            .padding(start = 4.dp, end = 4.dp)
+                            .weight(1f),
+                        shape = RoundedCornerShape(8.dp),
+                        onClick = {
+                            showSheet.value = false
+                            onColorSelected.invoke(selectedColor)
+                        }
+                    ) {
+                        Text(text = stringResource(R.string.label_select), color = MaterialTheme.colorScheme.onPrimary)
+                    }
                 }
             }
         }
