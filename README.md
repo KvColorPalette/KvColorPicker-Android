@@ -1,5 +1,7 @@
 # KvColorPicker - Android
 
+[![](https://jitpack.io/v/KvColorPalette/KvColorPicker-Android.svg)](https://jitpack.io/#KvColorPalette/KvColorPicker-Android)
+
 This is a lightweight Android library that provides Jetpack Compose `@Composable` UI to select colors. This open as a bottom sheet in default. 
 But developers can use individual peaces available in the library as per their requirements.
 
