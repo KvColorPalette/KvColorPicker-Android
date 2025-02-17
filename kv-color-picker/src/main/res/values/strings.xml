@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label.close">CLOSE</string>
+    <string name="label.select">SELECT</string>
+    <string name="label.rgba">RGB-A</string>
+    <string name="label.grid">GRID</string>
+    <string name="label.color.hex">Color Hex</string>
+    <string name="title.pick.color">Pick your Color</string>
+    <string name="phrase.selected.color">This is the selected\/generated color.</string>
+    <string name="phrase.select.color.grid">By selecting color from the grid below, you can pick your color.</string>
+    <string name="phrase.select.color.rgba">By dragging \'RED\', \'GREEN\', and \'BLUE\' bars below, you can select or generate your color you want exactly.</string>
+</resources>

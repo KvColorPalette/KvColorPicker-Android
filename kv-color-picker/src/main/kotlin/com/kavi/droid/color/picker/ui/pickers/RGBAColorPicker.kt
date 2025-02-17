@@ -21,15 +21,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.util.ColorUtil
+import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.AlphaSlider
 import com.kavi.droid.color.picker.ui.common.ColorSlider
-import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
 
 /**
  * A composable function that creates a color picker UI for selecting RGB-A colors. This component
@@ -76,8 +76,7 @@ fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                 .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
         ) {
             Text(
-                text ="By dragging \'RED\', \'GREEN\', and \'BLUE\' bars below, you can select " +
-                        "or generate your color you want exactly.",
+                text = stringResource(R.string.phrase_select_color_rgba),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 12.dp),
@@ -100,19 +99,6 @@ fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                     AlphaSlider(alpha, color)
                 }
             }
-        }
-
-        Column (
-            modifier = Modifier
-                .border(1.dp, Color.White, shape = RoundedCornerShape(8.dp))
-                .shadow(
-                    elevation = 10.dp,
-                    shape = RoundedCornerShape(8.dp)
-                )
-                .background(Color.White)
-                .padding(start = 12.dp, end = 12.dp)
-        ) {
-            SelectedColorDetail(color = color, colorHex = colorHex)
         }
     }
 }

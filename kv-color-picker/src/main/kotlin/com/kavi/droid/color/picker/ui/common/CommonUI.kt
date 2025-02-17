@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
@@ -30,12 +30,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.kavi.droid.color.palette.KvColorPalette
 import com.kavi.droid.color.palette.model.KvColor
 import com.kavi.droid.color.palette.util.ColorUtil
+import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.extension.toColorInt
 
 /**
@@ -141,7 +144,9 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
     // Retrieve a ClipboardManager object
     val clipboardManager = LocalClipboardManager.current
 
-    Row {
+    Row (
+        modifier = Modifier.background(MaterialTheme.colorScheme.background)
+    ) {
         // Display the current color in a Box with a MaterialTheme shape
         Column (
             verticalArrangement = Arrangement.Center
@@ -163,39 +168,36 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Text(
-                text = "Some Text Detail description",
+                text = stringResource(R.string.phrase_selected_color),
                 modifier = Modifier
                     .fillMaxWidth(),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Black
             )
 
             Row {
                 OutlinedTextField(
                     modifier = Modifier
                         .padding(2.dp)
-                        .weight(.6f),
+                        .weight(.8f),
                     value = colorHex.value,
                     maxLines = 1,
-                    label = { Text(text = "Color Hex") },
+                    label = { Text(text = stringResource(R.string.label_color_hex)) },
                     onValueChange = { newColorHex ->
                         colorHex.value = newColorHex
                     }
                 )
-
-                Button(
+                Icon(
+                    painter = painterResource(R.drawable.icon_copy),
+                    contentDescription = "copy icon",
                     modifier = Modifier
-                        .padding(start = 8.dp, end = 8.dp, top = 10.dp)
-                        .height(55.dp)
-                        .weight(.4f),
-                    shape = RoundedCornerShape(8.dp),
-                    onClick = {
-                        clipboardManager.setText(colorHex.value.annotatedString)
-                    }
-                ) {
-                    Text(text = "Copy")
-                }
+                        .width(45.dp)
+                        .height(45.dp)
+                        .padding(8.dp)
+                        .clickable {
+                            clipboardManager.setText(colorHex.value.annotatedString)
+                        }
+                )
             }
         }
     }
