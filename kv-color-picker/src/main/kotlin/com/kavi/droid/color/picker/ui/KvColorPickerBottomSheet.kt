@@ -55,11 +55,12 @@ import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: SheetState, onColorSelected: (selectedColor: Color) -> Unit) {
-    ModalBottomSheet(
+    ModalBottomSheet (
         onDismissRequest = {
             showSheet.value = false
         },
         sheetState = sheetState,
+        containerColor = MaterialTheme.colorScheme.background
     ) {
         Column {
             var selectedColor by remember { mutableStateOf(Color.Black) }
@@ -74,8 +75,9 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                 text = stringResource(R.string.title_pick_color),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
-                    .fillMaxWidth().padding(start = 16.dp, end = 16.dp),
-                fontSize = 32.sp
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                fontSize = 36.sp
             )
 
             TabRow(

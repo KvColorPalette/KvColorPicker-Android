@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -167,7 +168,7 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
             verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             Text(
-                text = "Some Text Detail description",
+                text = stringResource(R.string.phrase_selected_color),
                 modifier = Modifier
                     .fillMaxWidth(),
                 textAlign = TextAlign.Start,
@@ -181,7 +182,7 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
                         .weight(.8f),
                     value = colorHex.value,
                     maxLines = 1,
-                    label = { Text(text = "Color Hex") },
+                    label = { Text(text = stringResource(R.string.label_color_hex)) },
                     onValueChange = { newColorHex ->
                         colorHex.value = newColorHex
                     }

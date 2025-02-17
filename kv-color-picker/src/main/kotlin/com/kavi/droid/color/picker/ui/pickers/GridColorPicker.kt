@@ -20,12 +20,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.color.MatPackage
 import com.kavi.droid.color.palette.util.ColorUtil
+import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.ColorColum
 
 /**
@@ -65,7 +67,7 @@ fun GridColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                 .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 8.dp)
         ) {
             Text(
-                text = "By selecting color from the grid below, you can pick your color.",
+                text = stringResource(R.string.phrase_select_color_grid),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 12.dp),
