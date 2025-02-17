@@ -132,7 +132,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                         elevation = 10.dp,
                         shape = RoundedCornerShape(8.dp)
                     )
-                    .background(Color.White)
+                    .background(color = MaterialTheme.colorScheme.background)
                     .padding(start = 12.dp, end = 12.dp)
             ) {
                 SelectedColorDetail(color = selectedColor, colorHex = colorHex)

@@ -143,7 +143,9 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
     // Retrieve a ClipboardManager object
     val clipboardManager = LocalClipboardManager.current
 
-    Row {
+    Row (
+        modifier = Modifier.background(MaterialTheme.colorScheme.background)
+    ) {
         // Display the current color in a Box with a MaterialTheme shape
         Column (
             verticalArrangement = Arrangement.Center
@@ -170,7 +172,6 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
                     .fillMaxWidth(),
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color.Black
             )
 
             Row {
