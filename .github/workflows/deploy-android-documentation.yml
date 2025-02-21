@@ -1,0 +1,82 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+      
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Generate Dokka Documentation
+        run: ./gradlew dokkaHtml
+
+      - name: Zip Generated Documentation
+        run: |
+          cd kv-color-picker/build/docs/dokkaHtml
+          zip -r ../../../../kv-color-picker-dokka.zip .
+
+      - name: Remove all files except documentation
+        run: |
+          shopt -s extglob
+          rm -rf !(kv-color-picker-dokka.zip|.git)
+
+      - name: Checkout to gh-pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if gh-pages exists
+          if git ls-remote --exit-code --heads origin gh-pages; then
+            git fetch origin gh-pages
+            git checkout gh-pages
+            git rm -rf .
+          else
+            git checkout --orphan gh-pages
+          fi
+
+      - name: Extract documentation
+        run: |
+          unzip kv-color-picker-dokka.zip
+          rm -rf kv-color-picker-dokka.zip
+          rm -rf .gradle
+
+          touch .nojekyll  # Prevent GitHub from treating it as a Jekyll site
+          git add .
+          git commit -m "Deploy Dokka documentation" || echo "No changes to commit"
+
+      - name: Push Changes with SSH
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+          git push git@github.com:KvColorPalette/KvColorPicker-Android.git gh-pages
