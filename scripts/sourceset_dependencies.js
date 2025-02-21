@@ -1,0 +1,1 @@
+sourceset_dependencies='{":kv-color-picker:dokkaHtml/androidTestRelease":[],":kv-color-picker:dokkaHtml/debug":[],":kv-color-picker:dokkaHtml/main":[],":kv-color-picker:dokkaHtml/release":[],":kv-color-picker:dokkaHtml/testFixtures":[],":kv-color-picker:dokkaHtml/testFixturesDebug":[],":kv-color-picker:dokkaHtml/testFixturesRelease":[]}'
