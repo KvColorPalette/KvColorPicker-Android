@@ -18,7 +18,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 composeMaterial = "1.7.6"
 composeNavigation = "2.8.5"
-kvColorPalette = "1.2.1"
+kvColorPalette = "2.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

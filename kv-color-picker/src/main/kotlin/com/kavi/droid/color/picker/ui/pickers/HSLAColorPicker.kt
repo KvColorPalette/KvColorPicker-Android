@@ -26,11 +26,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.kavi.droid.color.palette.extension.hsl
 import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.AlphaSlider
-import com.kavi.droid.color.picker.ui.common.ColorHueSlider
 import com.kavi.droid.color.picker.ui.common.ColorSaturationAndLightnessSlider
+import com.kavi.droid.color.picker.ui.common.SliderHue
 
 @Composable
 fun HSLAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
@@ -38,15 +39,15 @@ fun HSLAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
     // State variables for HSL-A values
     val hue = rememberSaveable { mutableFloatStateOf(0f) }
     val saturation = rememberSaveable { mutableFloatStateOf(0f) }
-    val lightness = rememberSaveable { mutableFloatStateOf(0f) }
+    val lightness = rememberSaveable { mutableFloatStateOf(0.5f) }
     val alpha = rememberSaveable { mutableFloatStateOf(1f) }
 
     val colorHex = remember { mutableStateOf(TextFieldValue("")) }
 
-    // Derived state for the color based on HSL-A values
+    // Derived state for the color based on RGBA values
     val color by remember {
         derivedStateOf {
-            Color.hsl(hue.floatValue, saturation.floatValue, lightness.floatValue, alpha.floatValue)
+            Color.hsl(hue = hue.floatValue, saturation = saturation.floatValue, lightness = lightness.floatValue, alpha.floatValue)
         }
     }
 
@@ -68,7 +69,7 @@ fun HSLAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                 .padding(start = 12.dp, end = 12.dp, top = 12.dp, bottom = 12.dp)
         ) {
             Text(
-                text = stringResource(R.string.phrase_select_color_rgba),
+                text = stringResource(R.string.phrase_select_color_hsla),
                 textAlign = TextAlign.Start,
                 modifier = Modifier
                     .fillMaxWidth().padding(start = 12.dp, end = 12.dp, top = 12.dp),
@@ -85,7 +86,11 @@ fun HSLAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                         .padding(12.dp),
                     verticalArrangement = Arrangement.spacedBy(5.dp)
                 ) {
-                    ColorHueSlider(hue, Color.Red)
+                    SliderHue(Modifier.padding(top = 4.dp, bottom = 4.dp), onColorSelect = { selectedColor ->
+                        hue.floatValue = selectedColor.hsl.hue
+                        saturation.floatValue = selectedColor.hsl.saturation
+                        lightness.floatValue = selectedColor.hsl.lightness
+                    })
                     ColorSaturationAndLightnessSlider("Saturation", saturation, color)
                     ColorSaturationAndLightnessSlider("Lightness", lightness, color)
                     AlphaSlider(alpha, color)

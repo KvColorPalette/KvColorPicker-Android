@@ -35,13 +35,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.KvColorPalette
 import com.kavi.droid.color.palette.model.KvColor
 import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.extension.toColorRangeInt
-import com.kavi.droid.color.picker.extension.toHueRangeInt
-import com.kavi.droid.color.picker.extension.toSaturationAndLightnessRangeInt
 
 /**
  * A composable function that creates a slider for adjusting a float value associated with a color.
@@ -65,6 +64,7 @@ internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float
         Text(
             text = colorLabel,
             color = Color.Black,
+            fontSize = 14.sp,
             modifier = Modifier.weight(.2f)
         )
         Slider(
@@ -107,8 +107,9 @@ internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         Text(
-            text = "ALPHA",
+            text = "Alpha",
             color = Color.Black,
+            fontSize = 12.sp,
             modifier = Modifier.weight(.2f)
         )
         Slider(
@@ -123,50 +124,6 @@ internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
         )
         Text(
             text = DecimalFormat("#.##").format(alphaValueState.value).toString(),
-            modifier = Modifier
-                .width(25.dp)
-                .weight(.1f),
-            textAlign = TextAlign.End,
-            style = MaterialTheme.typography.bodySmall,
-            color = Color.Black
-        )
-    }
-}
-
-/**
- * A composable function that creates a slider for adjusting a float value associated with a color.
- *
- * @param hueValueState: MutableState<Float>: The mutable state holding the current color value of the slider.
- * @param color: Color: The color used for the active track of the slider.
- *
- * @return @Composable: A slider UI for color selection.
- */
-@Composable
-internal fun ColorHueSlider(hueValueState: MutableState<Float>, color: Color) {
-    /**
-     * Displays a slider for adjusting the given [hueValueState]
-     * The slider's active track color is set to [color].
-     */
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(6.dp)
-    ) {
-        Text(
-            text = "Hue",
-            color = Color.Black,
-            modifier = Modifier.weight(.2f)
-        )
-        Slider(
-            value = hueValueState.value,
-            onValueChange = hueValueState.component2(),
-            colors = SliderDefaults.colors(
-                thumbColor = MaterialTheme.colorScheme.primary,
-                activeTrackColor = color
-            ),
-            modifier = Modifier.weight(.8f)
-        )
-        Text(
-            text = hueValueState.value.toHueRangeInt().toString(),
             modifier = Modifier
                 .width(25.dp)
                 .weight(.1f),
@@ -199,6 +156,7 @@ internal fun ColorSaturationAndLightnessSlider(label: String, valueState: Mutabl
         Text(
             text = label,
             color = Color.Black,
+            fontSize = 12.sp,
             modifier = Modifier.weight(.2f)
         )
         Slider(
@@ -208,10 +166,11 @@ internal fun ColorSaturationAndLightnessSlider(label: String, valueState: Mutabl
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = color
             ),
+            valueRange = 0f..1f,
             modifier = Modifier.weight(.8f),
         )
         Text(
-            text = valueState.value.toSaturationAndLightnessRangeInt().toString(),
+            text = DecimalFormat("#.##").format(valueState.value).toString(),
             modifier = Modifier
                 .width(25.dp)
                 .weight(.1f),
