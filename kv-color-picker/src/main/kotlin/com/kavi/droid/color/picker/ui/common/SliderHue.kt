@@ -34,12 +34,11 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.toRect
-import com.kavi.droid.color.palette.extension.isHighLightColor
 import android.graphics.Color as AndroidColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SliderHue(modifier: Modifier, onColorSelect: (color: Color) -> Unit) {
+internal fun SliderHue(modifier: Modifier, onColorSelect: (color: Color) -> Unit) {
     val hueValueState = rememberSaveable { mutableFloatStateOf(0f) }
     val huePanel = rememberSaveable { mutableStateOf(RectF()) }
     val hueColors = rememberSaveable { mutableStateOf(IntArray(0)) }
@@ -125,7 +124,7 @@ private fun HuePanel(hueColors: MutableState<IntArray>, huePanel: MutableState<R
     }
 }
 
-fun pointToHue(pointX: Float, huePanel: RectF): Float {
+private fun pointToHue(pointX: Float, huePanel: RectF): Float {
     val width = huePanel.width()
     val x = when {
         pointX < huePanel.left -> 0f

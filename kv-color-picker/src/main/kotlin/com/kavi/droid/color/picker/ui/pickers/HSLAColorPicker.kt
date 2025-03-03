@@ -33,6 +33,17 @@ import com.kavi.droid.color.picker.ui.common.AlphaSlider
 import com.kavi.droid.color.picker.ui.common.ColorSaturationAndLightnessSlider
 import com.kavi.droid.color.picker.ui.common.SliderHue
 
+/**
+ * A composable function that creates a color picker UI for selecting HSL-A properties to get color. This component
+ * contain one color spectrum, that consumer can drag and select their color. Using the other three sliders, consumer can change the
+ * selected color's saturation, lightness and alpha values.
+ * By adjusting these values, consumer can select or generate their desired color.
+ *
+ * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
+ *
+ * @return @Composable: A color picker UI for selecting HSL-A colors.
+ */
 @Composable
 fun HSLAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
 
