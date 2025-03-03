@@ -1,7 +1,5 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:com.kavi.droid.color.picker.ui.common////PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui.common/index.html
-$dokka.location:com.kavi.droid.color.picker.ui.common//HuePanel_Preview/#/PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui.common/-hue-panel_-preview.html
 $dokka.location:com.kavi.droid.color.picker.ui.pickers////PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui.pickers/index.html
 $dokka.location:com.kavi.droid.color.picker.ui.pickers//GridColorPicker/#androidx.compose.ui.Modifier#kotlin.Function1[androidx.compose.ui.graphics.Color,kotlin.Unit]/PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui.pickers/-grid-color-picker.html
 $dokka.location:com.kavi.droid.color.picker.ui.pickers//HSLAColorPicker/#androidx.compose.ui.Modifier#kotlin.Function1[androidx.compose.ui.graphics.Color,kotlin.Unit]/PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui.pickers/-h-s-l-a-color-picker.html
@@ -9,6 +7,5 @@ $dokka.location:com.kavi.droid.color.picker.ui.pickers//RGBAColorPicker/#android
 $dokka.location:com.kavi.droid.color.picker.ui////PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui/index.html
 $dokka.location:com.kavi.droid.color.picker.ui//KvColorPickerBottomSheet/#androidx.compose.runtime.MutableState[kotlin.Boolean]#androidx.compose.material3.SheetState#kotlin.Function1[androidx.compose.ui.graphics.Color,kotlin.Unit]/PointingToDeclaration/kv-color-picker/com.kavi.droid.color.picker.ui/-kv-color-picker-bottom-sheet.html
 com.kavi.droid.color.picker.ui
-com.kavi.droid.color.picker.ui.common
 com.kavi.droid.color.picker.ui.pickers
 
