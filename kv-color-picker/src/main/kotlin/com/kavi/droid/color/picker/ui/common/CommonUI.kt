@@ -35,11 +35,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.KvColorPalette
 import com.kavi.droid.color.palette.model.KvColor
 import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
-import com.kavi.droid.color.picker.extension.toColorInt
+import com.kavi.droid.color.picker.extension.toColorRangeInt
 
 /**
  * A composable function that creates a slider for adjusting a float value associated with a color.
@@ -63,6 +64,7 @@ internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float
         Text(
             text = colorLabel,
             color = Color.Black,
+            fontSize = 14.sp,
             modifier = Modifier.weight(.2f)
         )
         Slider(
@@ -75,7 +77,7 @@ internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float
             modifier = Modifier.weight(.8f)
         )
         Text(
-            text = colorValueState.value.toColorInt().toString(),
+            text = colorValueState.value.toColorRangeInt().toString(),
             modifier = Modifier
                 .width(25.dp)
                 .weight(.1f),
@@ -105,8 +107,9 @@ internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
         horizontalArrangement = Arrangement.spacedBy(6.dp)
     ) {
         Text(
-            text = "ALPHA",
+            text = "Alpha",
             color = Color.Black,
+            fontSize = 12.sp,
             modifier = Modifier.weight(.2f)
         )
         Slider(
@@ -121,6 +124,53 @@ internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
         )
         Text(
             text = DecimalFormat("#.##").format(alphaValueState.value).toString(),
+            modifier = Modifier
+                .width(25.dp)
+                .weight(.1f),
+            textAlign = TextAlign.End,
+            style = MaterialTheme.typography.bodySmall,
+            color = Color.Black
+        )
+    }
+}
+
+/**
+ * A composable function that creates a slider for adjusting a float value associated with a color alpha valuw.
+ *
+ * @param label: String: The label to display alongside the slider.
+ * @param valueState: MutableState<Float>: The mutable state holding the current value of the slider.
+ * @param color: Color: The color used for the active track of the slider.
+ *
+ * @return @Composable: A slider UI for alpha selection.
+ */
+@Composable
+internal fun ColorSaturationAndLightnessSlider(label: String, valueState: MutableState<Float>, color: Color) {
+    /**
+     * Displays a slider for adjusting the given [valueState] associated with the provided [label].
+     * The slider's active track color is set to [color].
+     */
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(6.dp)
+    ) {
+        Text(
+            text = label,
+            color = Color.Black,
+            fontSize = 12.sp,
+            modifier = Modifier.weight(.2f)
+        )
+        Slider(
+            value = valueState.value,
+            onValueChange = valueState.component2(),
+            colors = SliderDefaults.colors(
+                thumbColor = MaterialTheme.colorScheme.primary,
+                activeTrackColor = color
+            ),
+            valueRange = 0f..1f,
+            modifier = Modifier.weight(.8f),
+        )
+        Text(
+            text = DecimalFormat("#.##").format(valueState.value).toString(),
             modifier = Modifier
                 .width(25.dp)
                 .weight(.1f),

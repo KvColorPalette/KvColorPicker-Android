@@ -5,4 +5,4 @@ package com.kavi.droid.color.picker.extension
  *
  * @return The integer representation of the color component.
  */
-internal fun Float.toColorInt(): Int = (this * 255 + 0.5f).toInt()
+internal fun Float.toColorRangeInt(): Int = (this * 255 + 0.5f).toInt()
