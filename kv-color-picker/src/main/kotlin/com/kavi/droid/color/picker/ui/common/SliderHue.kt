@@ -147,9 +147,3 @@ private fun DrawScope.drawBitmap(
         )
     }
 }
-
-@Preview
-@Composable
-fun HuePanel_Preview() {
-    SliderHue(Modifier, {})
-}
