@@ -42,6 +42,7 @@ After you integrated the `KvColorPicker-Android` library, you can consume it as 
 As a main functionality, consumer can use color picker bottom sheet in there application as follows.
 ```
 // Create state variable to show and hide bottom sheet
+val showSheet = remember { mutableStateOf(false) }
 val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
 // Button click to open bottom-sheet
@@ -54,13 +55,15 @@ Button(
 }
 
 // Color Picker bottom sheet UI
-KvColorPickerBottomSheet(
-    showSheet = showSheet,
-    sheetState = sheetState, 
-    onColorSelected = { selectedColor -> 
-        // Do anything when you have selected color
-    }
-)
+if (showSheet.value) {
+    KvColorPickerBottomSheet(
+        showSheet = showSheet,
+        sheetState = sheetState, 
+        onColorSelected = { selectedColor -> 
+            // Do anything when you have selected color
+        }
+    )
+}
 ```
 
 # Contribution
