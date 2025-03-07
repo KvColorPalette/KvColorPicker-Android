@@ -62,6 +62,10 @@ KvColorPickerBottomSheet(
     }
 )
 ```
+# Demo
+|RGB-A Picker |GRID Picker |HSL-A Picker  |
+|-------------|------------|--------------|
+|![](images/RGB-A-Picker.gif)        |![](images/GRID-Picker.gif)    |![](images/HSL-A-Picker.gif)    |
 
 # Contribution
 We welcome contributions! Please fork the repository, make your changes, and submit a pull request. Ensure your code adheres to the established guidelines.
