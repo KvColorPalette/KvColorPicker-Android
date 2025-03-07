@@ -9,6 +9,7 @@ But developers can use individual peaces available in the library as per their r
 * Color Picker BottomSheet
 * Pick color from RGB-A values
 * Pick color from Predefined color grid
+* Pick color from HSL-A values (Color spectrum)
 
 # Installation
 Add following in your root `build.gradle`/`build.gradle.kts` at the end of repositories:
@@ -65,10 +66,41 @@ if (showSheet.value) {
     )
 }
 ```
-# Demo
+#### The way it works
 |RGB-A Picker |GRID Picker |HSL-A Picker  |
 |-------------|------------|--------------|
 |![](images/RGB-A-Picker.gif)        |![](images/GRID-Picker.gif)    |![](images/HSL-A-Picker.gif)    |
+
+### Use color picker UI components in existing UI
+Developer can add the each color picker (`RGB-A Picker`, `Grid Picker` and `HSL-A Picker`) separately in their own UI. Because `KvColorPicker-Android`
+provided.
+#### RGB-A Picker
+```
+RGBAColorPicker(
+    modifier = Modifier,
+    onColorSelected = { selectedColor ->
+        // Action with selected color
+    }
+)
+```
+#### GRID Picker
+```
+GridColorPicker(
+    modifier = Modifier,
+    onColorSelected = { selectedColor ->
+        // Action with selected color
+    }
+)
+```
+#### HSL-A Picker
+```
+HSLAColorPicker(
+    modifier = Modifier,
+    onColorSelected = { selectedColor ->
+        // Action with selected color
+    }
+)
+```
 
 # Contribution
 We welcome contributions! Please fork the repository, make your changes, and submit a pull request. Ensure your code adheres to the established guidelines.
