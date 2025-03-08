@@ -13,12 +13,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -32,6 +35,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,7 +45,6 @@ import com.kavi.droid.color.palette.KvColorPalette
 import com.kavi.droid.color.palette.model.KvColor
 import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
-import com.kavi.droid.color.picker.extension.toColorRangeInt
 
 /**
  * A composable function that creates a slider for adjusting a float value associated with a color.
@@ -53,6 +57,9 @@ import com.kavi.droid.color.picker.extension.toColorRangeInt
  */
 @Composable
 internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float>, color: Color) {
+
+    val sliderValue = remember { mutableStateOf(TextFieldValue("0")) }
+
     /**
      * Displays a slider for adjusting the given [colorValueState] associated with the provided [colorLabel].
      * The slider's active track color is set to [color].
@@ -69,22 +76,61 @@ internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float
         )
         Slider(
             value = colorValueState.value,
-            onValueChange = colorValueState.component2(),
+            onValueChange = { newValue ->
+                colorValueState.value = newValue
+                sliderValue.value = TextFieldValue(toColorRange(colorValueState.value).toString())
+            },
             colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = color
             ),
             modifier = Modifier.weight(.8f)
         )
-        Text(
-            text = colorValueState.value.toColorRangeInt().toString(),
+        Box (
             modifier = Modifier
-                .width(25.dp)
-                .weight(.1f),
-            textAlign = TextAlign.End,
-            style = MaterialTheme.typography.bodySmall,
-            color = Color.Black
-        )
+                .width(80.dp)
+                .weight(.2f)
+                .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(20))
+        ) {
+            BasicTextField(
+                value = sliderValue.value,
+                onValueChange = {
+                    if (it.text != "" && it.text.toInt() > 255)
+                        sliderValue.value = TextFieldValue("255")
+                    else
+                        sliderValue.value = it
+
+                    colorValueState.value = sliderRange(sliderValue.value.text)
+                },
+                modifier = Modifier
+                    .width(80.dp)
+                    .padding(5.dp),
+                textStyle = TextStyle(fontSize = 12.sp, color = Color.Black, textAlign = TextAlign.Center),
+                maxLines = 1,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            )
+        }
+
+    }
+}
+
+/**
+ * Converts a float value in the range [0, 1] to an integer color component in the range [0, 255].
+ *
+ * @return The integer representation of the color component.
+ */
+private fun toColorRange(value: Float): Int = (value * 255 + 0.5f).toInt()
+
+/**
+ * Converts a string value in the range [0, 255] to a float value of slider in tha range of [0, 1]
+ *
+ * @return The float representation of the slider component
+ */
+private fun sliderRange(value: String): Float {
+    return if (value == "") {
+        0f
+    } else {
+        (value.toFloat() / 255)
     }
 }
 
@@ -126,8 +172,8 @@ internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
             text = DecimalFormat("#.##").format(alphaValueState.value).toString(),
             modifier = Modifier
                 .width(25.dp)
-                .weight(.1f),
-            textAlign = TextAlign.End,
+                .weight(.2f),
+            textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall,
             color = Color.Black
         )
@@ -135,7 +181,7 @@ internal fun AlphaSlider(alphaValueState: MutableState<Float>, color: Color) {
 }
 
 /**
- * A composable function that creates a slider for adjusting a float value associated with a color alpha valuw.
+ * A composable function that creates a slider for adjusting a float value associated with a color alpha value.
  *
  * @param label: String: The label to display alongside the slider.
  * @param valueState: MutableState<Float>: The mutable state holding the current value of the slider.
