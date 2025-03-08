@@ -1,7 +1,6 @@
 [versions]
 minSdkVersion = "26"
 compilerSdkVersion = "35"
-targetSdkVersion = "35"
 jvmVersion = "21"
 
 agp = "8.7.3"
@@ -12,13 +11,12 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.10.0"
-composeBom = "2025.01.00"
+activityCompose = "1.10.1"
+composeBom = "2025.02.00"
 appcompat = "1.7.0"
 material = "1.12.0"
-composeMaterial = "1.7.6"
-composeNavigation = "2.8.5"
-kvColorPalette = "2.1.0"
+composeMaterial = "1.7.8"
+kvColorPalette = "2.1.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -36,7 +34,6 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material = { group = "androidx.compose.material", name = "material", version.ref = "composeMaterial"}
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 
 kv-color-palette = { group = "com.github.KvColorPalette", name = "KvColorPalette-Android", version.ref = "kvColorPalette" }
 
