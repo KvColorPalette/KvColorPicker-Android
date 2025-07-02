@@ -11,6 +11,13 @@ But developers can use individual peaces available in the library as per their r
 * Pick color from Predefined color grid
 * Pick color from HSL-A values (Color spectrum)
 
+# Reference App
+To show case all features and functionalities of this library, there is a reference app we build. Application is already available in Google Play Store. Reference app code is available in GitHub.
+|Title                  |Link                                                                           |
+|-----------------------|-------------------------------------------------------------------------------|
+|Google Play Store      |https://play.google.com/store/apps/details?id=com.kavi.droid.color.palette.app |
+|GitHub Code Reference  |https://github.com/KvColorPalette/KvColorPalette-Android-App                   |
+
 # Installation
 Add following in your root `build.gradle`/`build.gradle.kts` at the end of repositories:
 ````
