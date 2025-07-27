@@ -61,7 +61,8 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
             showSheet.value = false
         },
         sheetState = sheetState,
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f)
     ) {
         Column {
             var selectedColor by remember { mutableStateOf(Color.Black) }
