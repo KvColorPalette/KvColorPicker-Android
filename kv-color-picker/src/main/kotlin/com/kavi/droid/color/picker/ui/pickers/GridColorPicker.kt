@@ -3,6 +3,7 @@ package com.kavi.droid.color.picker.ui.pickers
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -76,88 +77,108 @@ fun GridColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedCol
                 fontSize = 12.sp
             )
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp, start = 4.dp, end = 4.dp, bottom = 12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                ColorColum(
-                    givenColor = MatPackage.MatRed,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatRose,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatLPurple,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatDPurple,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatDBlue,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatLBlue,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatLLBlue,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatLCyan,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatDCyan,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatDGreen,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatLGreen,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatLLGreen,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatYellow,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatGold,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
-                ColorColum(
-                    givenColor = MatPackage.MatOrange,
-                    selectedColor = selectedColor,
-                    onSelect = onSelectColor
-                )
+            BoxWithConstraints {
+                val screenWidth = maxWidth
+                val boxSize = screenWidth * .065f
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp, start = 4.dp, end = 4.dp, bottom = 12.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatRed,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatRose,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatLPurple,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatDPurple,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatDBlue,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatLBlue,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatLLBlue,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatLCyan,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatDCyan,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatDGreen,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatLGreen,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatLLGreen,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatYellow,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatGold,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                    ColorColum(
+                        boxSize = boxSize,
+                        givenColor = MatPackage.MatOrange,
+                        selectedColor = selectedColor,
+                        onSelect = onSelectColor
+                    )
+                }
             }
         }
     }
