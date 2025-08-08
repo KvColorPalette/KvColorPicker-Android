@@ -40,18 +40,22 @@ import com.kavi.droid.color.picker.ui.common.SliderHue
  * By adjusting these values, consumer can select or generate their desired color.
  *
  * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param lastSelectedColor: Color: variable to pass last selected color.
  * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
  *
  * @return @Composable: A color picker UI for selecting HSL-A colors.
  */
 @Composable
-fun HSLAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
-
+fun HSLAColorPicker(
+    modifier: Modifier = Modifier,
+    lastSelectedColor: Color = Color.White,
+    onColorSelected: (selectedColor: Color) -> Unit
+) {
     // State variables for HSL-A values
-    val hue = rememberSaveable { mutableFloatStateOf(0f) }
-    val saturation = rememberSaveable { mutableFloatStateOf(0f) }
-    val lightness = rememberSaveable { mutableFloatStateOf(0.5f) }
-    val alpha = rememberSaveable { mutableFloatStateOf(1f) }
+    val hue = rememberSaveable { mutableFloatStateOf(lastSelectedColor.hsl.hue) }
+    val saturation = rememberSaveable { mutableFloatStateOf(lastSelectedColor.hsl.saturation) }
+    val lightness = rememberSaveable { mutableFloatStateOf(lastSelectedColor.hsl.lightness) }
+    val alpha = rememberSaveable { mutableFloatStateOf(lastSelectedColor.alpha) }
 
     val colorHex = remember { mutableStateOf(TextFieldValue("")) }
 

@@ -37,17 +37,22 @@ import com.kavi.droid.color.picker.ui.common.ColorSlider
  * By adjusting these values, consumer can select or generate your desired color.
  *
  * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param lastSelectedColor: Color: variable to pass last selected color.
  * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
  *
  * @return @Composable: A color picker UI for selecting RGB-A colors.
  */
 @Composable
-fun RGBAColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
+fun RGBAColorPicker (
+    modifier: Modifier = Modifier,
+    lastSelectedColor: Color = Color.White,
+    onColorSelected: (selectedColor: Color) -> Unit
+) {
     // State variables for RGB-A values
-    val red = rememberSaveable { mutableFloatStateOf(0f) }
-    val green = rememberSaveable { mutableFloatStateOf(0f) }
-    val blue = rememberSaveable { mutableFloatStateOf(0f) }
-    val alpha = rememberSaveable { mutableFloatStateOf(1f) }
+    val red = rememberSaveable { mutableFloatStateOf(lastSelectedColor.red) }
+    val green = rememberSaveable { mutableFloatStateOf(lastSelectedColor.green) }
+    val blue = rememberSaveable { mutableFloatStateOf(lastSelectedColor.blue) }
+    val alpha = rememberSaveable { mutableFloatStateOf(lastSelectedColor.alpha) }
 
     val colorHex = remember { mutableStateOf(TextFieldValue("")) }
 

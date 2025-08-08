@@ -1,5 +1,6 @@
 package com.kavi.droid.color.picker.ui.pickers
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -36,15 +37,21 @@ import com.kavi.droid.color.picker.ui.common.ColorColum
  * 16 predefined major colors and those color's 10 color variances.
  *
  * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param lastSelectedColor: Color: variable to pass last selected color.
  * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
  *
  * @return @Composable: A grid UI to select colors.
  */
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
-fun GridColorPicker(modifier: Modifier = Modifier, onColorSelected: (selectedColor: Color) -> Unit) {
+fun GridColorPicker(
+    modifier: Modifier = Modifier,
+    lastSelectedColor: Color = Color.White,
+    onColorSelected: (selectedColor: Color) -> Unit
+) {
 
-    var selectedColor by remember { mutableStateOf(Color.White) }
-    val colorHex = remember { mutableStateOf(TextFieldValue("#ffffff")) }
+    var selectedColor by remember { mutableStateOf(lastSelectedColor) }
+    val colorHex = remember { mutableStateOf(TextFieldValue(ColorUtil.getHex(lastSelectedColor))) }
 
     val onSelectColor: (color: Color) -> Unit = {
         selectedColor = it
