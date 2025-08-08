@@ -47,6 +47,7 @@ import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
  * RGBAColorPicker: This a color picker with RGB and Alpha values. Consumer can create their own color by changing
  * RED, GREEN and BLUE values in a color.
  *
+ * @param lastSelectedColor: Color: variable to pass last selected color.
  * @param showSheet: MutableState<Boolean>: State variable to show and hide bottom sheet.
  * @param sheetState: SheetState: State variable to control the bottom sheet.
  * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
@@ -55,16 +56,21 @@ import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: SheetState, onColorSelected: (selectedColor: Color) -> Unit) {
+fun KvColorPickerBottomSheet(
+    lastSelectedColor: Color = Color.White,
+    showSheet: MutableState<Boolean>,
+    sheetState: SheetState,
+    onColorSelected: (selectedColor: Color) -> Unit) {
     ModalBottomSheet (
         onDismissRequest = {
             showSheet.value = false
         },
         sheetState = sheetState,
-        containerColor = MaterialTheme.colorScheme.background
+        containerColor = MaterialTheme.colorScheme.background,
+        scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f)
     ) {
         Column {
-            var selectedColor by remember { mutableStateOf(Color.Black) }
+            var selectedColor by remember { mutableStateOf(lastSelectedColor) }
             val colorHex = remember { mutableStateOf(TextFieldValue("#000000")) }
             var tabIndex by remember { mutableIntStateOf(0) }
             val tabs = listOf(
@@ -114,6 +120,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
             when(tabIndex) {
                 0 -> RGBAColorPicker(
                     modifier = Modifier.padding(16.dp),
+                    lastSelectedColor = selectedColor,
                     onColorSelected = {
                         selectedColor = it
                         colorHex.value = TextFieldValue(ColorUtil.getHex(it))
@@ -121,6 +128,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                 )
                 1 -> GridColorPicker(
                     modifier = Modifier.padding(16.dp),
+                    lastSelectedColor = selectedColor,
                     onColorSelected = {
                         selectedColor = it
                         colorHex.value = TextFieldValue(ColorUtil.getHex(it))
@@ -128,6 +136,7 @@ fun KvColorPickerBottomSheet(showSheet: MutableState<Boolean>, sheetState: Sheet
                 )
                 2 -> HSLAColorPicker(
                     modifier = Modifier.padding(16.dp),
+                    lastSelectedColor = selectedColor,
                     onColorSelected = {
                         selectedColor = it
                         colorHex.value = TextFieldValue(ColorUtil.getHex(it))

@@ -39,6 +39,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.KvColorPalette
@@ -307,11 +308,21 @@ internal fun SelectedColorDetail(color: Color, colorHex: MutableState<TextFieldV
  * @param onSelect: (color: Color) -> Unit: Callback to invoke when a color is selected.
  */
 @Composable
-internal fun ColorColum(givenColor: KvColor, selectedColor: Color, onSelect: (color: Color) -> Unit) {
+internal fun ColorColum(
+    boxSize: Dp,
+    givenColor: KvColor,
+    selectedColor: Color,
+    onSelect: (color: Color) -> Unit
+) {
     val colors = KvColorPalette.instance.generateColorPalette(givenColor = givenColor)
     Column {
         colors.forEach {
-            ColorBox(givenColor = it, selectedColor = selectedColor, onSelect = onSelect)
+            ColorBox(
+                boxSize = boxSize,
+                givenColor = it,
+                selectedColor = selectedColor,
+                onSelect = onSelect
+            )
         }
     }
 }
@@ -319,12 +330,13 @@ internal fun ColorColum(givenColor: KvColor, selectedColor: Color, onSelect: (co
 /**
  * A composable function that displays a single color box.
  *
+ * @param boxSize: Dp: Size of the color box.
  * @param givenColor: Color: The color to display.
  * @param selectedColor: Color: The selected color to highlight.
  * @param onSelect: (color: Color) -> Unit: Callback to invoke when a color is selected.
  */
 @Composable
-internal fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color: Color) -> Unit) {
+internal fun ColorBox(boxSize: Dp = 24.dp, givenColor: Color, selectedColor: Color?, onSelect: (color: Color) -> Unit) {
     var isSelected by remember { mutableStateOf(false) }
 
     selectedColor?.let {
@@ -333,8 +345,8 @@ internal fun ColorBox(givenColor: Color, selectedColor: Color?, onSelect: (color
 
     Box(
         modifier = Modifier
-            .width(24.dp)
-            .height(24.dp)
+            .width(boxSize)
+            .height(boxSize)
             .background(givenColor, RectangleShape)
             .clickable {
                 isSelected = true
