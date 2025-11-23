@@ -51,11 +51,9 @@ fun GridColorPicker(
 ) {
 
     var selectedColor by remember { mutableStateOf(lastSelectedColor) }
-    val colorHex = remember { mutableStateOf(TextFieldValue(ColorUtil.getHex(lastSelectedColor))) }
 
     val onSelectColor: (color: Color) -> Unit = {
         selectedColor = it
-        colorHex.value = TextFieldValue(ColorUtil.getHex(it))
     }
 
     // Launch an effect to invoke the provided callback with the selected color

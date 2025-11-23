@@ -146,7 +146,6 @@ fun KvColorPickerBottomSheet(
                 )
                 3 -> BlendColorPicker(
                     modifier = Modifier.padding(16.dp),
-                    lastSelectedColor = selectedColor,
                     onColorSelected = {
                         selectedColor = it
                         colorHex.value = TextFieldValue(ColorUtil.getHex(it))

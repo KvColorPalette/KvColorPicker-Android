@@ -54,8 +54,6 @@ fun RGBAColorPicker (
     val blue = rememberSaveable { mutableFloatStateOf(lastSelectedColor.blue) }
     val alpha = rememberSaveable { mutableFloatStateOf(lastSelectedColor.alpha) }
 
-    val colorHex = remember { mutableStateOf(TextFieldValue("")) }
-
     // Derived state for the color based on RGBA values
     val color by remember {
         derivedStateOf {
@@ -65,7 +63,6 @@ fun RGBAColorPicker (
 
     // Launch an effect to invoke the provided callback with the selected color
     LaunchedEffect(color) {
-        colorHex.value = TextFieldValue(ColorUtil.getHex(color = color))
         onColorSelected.invoke(color)
     }
 

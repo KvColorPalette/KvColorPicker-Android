@@ -18,7 +18,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -34,23 +35,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.extension.hsl
+import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.SliderHue
 
 @Composable
 fun BlendColorPicker(
     modifier: Modifier = Modifier,
-    lastSelectedColor: Color = Color.White,
     onColorSelected: (selectedColor: Color) -> Unit
 ) {
-    // State variables for HSL-A values
-    val firstHue = remember { mutableFloatStateOf(lastSelectedColor.hsl.hue) }
-    val secondHue = remember { mutableFloatStateOf(lastSelectedColor.hsl.hue) }
+    // State variables for first color hue and second color hue
+    val firstHue = remember { mutableFloatStateOf(Color.White.hsl.hue) }
+    val secondHue = remember { mutableFloatStateOf(Color.White.hsl.hue) }
 
-    val firstBlendColor = remember { mutableStateOf(lastSelectedColor) }
-    val secondBlendColor = remember { mutableStateOf(lastSelectedColor) }
+    val firstBlendColor = remember { mutableStateOf(Color.White) }
+    val firstBlendColorHex = remember { mutableStateOf(ColorUtil.getHex(Color.White)) }
+    val secondBlendColor = remember { mutableStateOf(Color.White) }
+    val secondBlendColorHex = remember { mutableStateOf(ColorUtil.getHex(Color.White)) }
 
     var colorBias by remember { mutableFloatStateOf(.5f) }
+
+    // Derived state for the color based on blending selected first and second color
+    val color by remember {
+        derivedStateOf {
+            ColorUtil.blendColors(firstBlendColor.value, secondBlendColor.value, bias = colorBias)
+        }
+    }
+
+    // Launch an effect to invoke the provided callback with the selected color
+    LaunchedEffect(color) {
+        onColorSelected.invoke(color)
+    }
 
     Column (modifier = modifier, verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Column (
@@ -75,7 +90,9 @@ fun BlendColorPicker(
             )
 
             Row (
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .padding(top = 8.dp)
+                    .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -87,7 +104,10 @@ fun BlendColorPicker(
                     SliderHue(Modifier.padding(top = 4.dp, bottom = 4.dp), onColorSelect = { selectedColor ->
                         firstHue.floatValue = selectedColor.hsl.hue
                         firstBlendColor.value = selectedColor
+                        firstBlendColorHex.value = ColorUtil.getHex(selectedColor)
                     })
+
+                    Text(text = firstBlendColorHex.value)
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
@@ -100,7 +120,10 @@ fun BlendColorPicker(
                     SliderHue(Modifier.padding(top = 4.dp, bottom = 4.dp), onColorSelect = { selectedColor ->
                         secondHue.floatValue = selectedColor.hsl.hue
                         secondBlendColor.value = selectedColor
+                        secondBlendColorHex.value = ColorUtil.getHex(selectedColor)
                     })
+
+                    Text(text = secondBlendColorHex.value)
                 }
             }
 

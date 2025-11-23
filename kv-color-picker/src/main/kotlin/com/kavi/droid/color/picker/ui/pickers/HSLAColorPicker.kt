@@ -57,9 +57,7 @@ fun HSLAColorPicker(
     val lightness = rememberSaveable { mutableFloatStateOf(lastSelectedColor.hsl.lightness) }
     val alpha = rememberSaveable { mutableFloatStateOf(lastSelectedColor.alpha) }
 
-    val colorHex = remember { mutableStateOf(TextFieldValue("")) }
-
-    // Derived state for the color based on RGBA values
+    // Derived state for the color based on HSL-A values
     val color by remember {
         derivedStateOf {
             Color.hsl(hue = hue.floatValue, saturation = saturation.floatValue, lightness = lightness.floatValue, alpha.floatValue)
@@ -68,7 +66,6 @@ fun HSLAColorPicker(
 
     // Launch an effect to invoke the provided callback with the selected color
     LaunchedEffect(color) {
-        colorHex.value = TextFieldValue(ColorUtil.getHex(color = color))
         onColorSelected.invoke(color)
     }
 
