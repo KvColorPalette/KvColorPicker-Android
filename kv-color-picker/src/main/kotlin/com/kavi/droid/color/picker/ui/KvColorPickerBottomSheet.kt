@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.SelectedColorDetail
+import com.kavi.droid.color.picker.ui.pickers.BlendColorPicker
 import com.kavi.droid.color.picker.ui.pickers.GridColorPicker
 import com.kavi.droid.color.picker.ui.pickers.HSLAColorPicker
 import com.kavi.droid.color.picker.ui.pickers.RGBAColorPicker
@@ -76,7 +77,8 @@ fun KvColorPickerBottomSheet(
             val tabs = listOf(
                 stringResource(R.string.label_rgba),
                 stringResource(R.string.label_grid),
-                stringResource(R.string.label_hsla)
+                stringResource(R.string.label_hsla),
+                stringResource(R.string.label_blend)
             )
 
             Text(
@@ -135,6 +137,14 @@ fun KvColorPickerBottomSheet(
                     }
                 )
                 2 -> HSLAColorPicker(
+                    modifier = Modifier.padding(16.dp),
+                    lastSelectedColor = selectedColor,
+                    onColorSelected = {
+                        selectedColor = it
+                        colorHex.value = TextFieldValue(ColorUtil.getHex(it))
+                    }
+                )
+                3 -> BlendColorPicker(
                     modifier = Modifier.padding(16.dp),
                     lastSelectedColor = selectedColor,
                     onColorSelected = {
