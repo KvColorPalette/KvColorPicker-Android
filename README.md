@@ -33,13 +33,13 @@ Add the following dependency to your `build.gradle` / `build.gradle.kts` file:
 For Groovy - `build.gradle`:
 ````
 dependencies {
-    implementation 'com.github.KvColorPalette:KvColorPicker-Android:2.2.0'
+    implementation 'com.github.KvColorPalette:KvColorPicker-Android:3.0.0'
 }
 ````
 For Kotlin DSL - `build.gradle.kts`:
 ````
 dependencies {
-    implementation("com.github.KvColorPalette:KvColorPicker-Android:2.2.0")
+    implementation("com.github.KvColorPalette:KvColorPicker-Android:3.0.0")
 }
 ````
 
@@ -74,9 +74,9 @@ if (showSheet.value) {
 }
 ```
 #### The way it works
-|RGB-A Picker |GRID Picker |HSL-A Picker  |
-|-------------|------------|--------------|
-|![](images/RGB-A-Picker.gif)        |![](images/GRID-Picker.gif)    |![](images/HSL-A-Picker.gif)    |
+|RGB-A Picker |GRID Picker |HSL-A Picker  |BLEND Picker   |
+|-------------|------------|--------------|---------------|
+|![](images/RGB-A-Picker.gif)        |![](images/GRID-Picker.gif)    |![](images/HSL-A-Picker.gif)    |![](images/BLEND-Picker.git)    |
 
 ### Use color picker UI components in existing UI
 Developer can add the each color picker (`RGB-A Picker`, `Grid Picker` and `HSL-A Picker`) separately in their own UI. Because `KvColorPicker-Android`
@@ -102,6 +102,16 @@ GridColorPicker(
 #### HSL-A Picker
 ```
 HSLAColorPicker(
+    modifier = Modifier,
+    onColorSelected = { selectedColor ->
+        // Action with selected color
+    }
+)
+```
+
+#### BLEND Picker
+```
+BlendColorPicker(
     modifier = Modifier,
     onColorSelected = { selectedColor ->
         // Action with selected color
