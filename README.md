@@ -74,9 +74,9 @@ if (showSheet.value) {
 }
 ```
 #### The way it works
-|RGB-A Picker |GRID Picker |HSL-A Picker  |BLEND Picker   |
-|-------------|------------|--------------|---------------|
-|![](images/RGB-A-Picker.gif)        |![](images/GRID-Picker.gif)    |![](images/HSL-A-Picker.gif)    |![](images/BLEND-Picker.git)    |
+|RGB-A Picker |GRID Picker |HSL-A Picker  | BLEND Picker                 |
+|-------------|------------|--------------|------------------------------|
+|![](images/RGB-A-Picker.gif)        |![](images/GRID-Picker.gif)    |![](images/HSL-A-Picker.gif)    | ![](images/BLEND-Picker.gif) |
 
 ### Use color picker UI components in existing UI
 Developer can add the each color picker (`RGB-A Picker`, `Grid Picker` and `HSL-A Picker`) separately in their own UI. Because `KvColorPicker-Android`
