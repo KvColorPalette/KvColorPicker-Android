@@ -39,6 +39,17 @@ import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.SliderHue
 
+/**
+ * A composable function that creates a color picker UI to select color by selecting two colors and blend.
+ * This component contains two color spectrum(s) to select first and second color to blend and one slider, that consumer
+ * can change how blended color bias to first or second color.
+ * By selecting first and second color then by adjusting color bias value, consumer can select or generate their desired color.
+ *
+ * @param modifier: Modifier: The modifier to apply to this layout.
+ * @param onColorSelected: (selectedColor: Color) -> Unit: Callback to invoke when a color is selected.
+ *
+ * @return @Composable: A color picker UI for selecting blended color.
+ */
 @Composable
 fun BlendColorPicker(
     modifier: Modifier = Modifier,
