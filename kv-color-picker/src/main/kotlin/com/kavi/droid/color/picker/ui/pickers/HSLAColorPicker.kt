@@ -15,19 +15,16 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.extension.hsl
-import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.AlphaSlider
 import com.kavi.droid.color.picker.ui.common.ColorSaturationAndLightnessSlider
@@ -57,9 +54,7 @@ fun HSLAColorPicker(
     val lightness = rememberSaveable { mutableFloatStateOf(lastSelectedColor.hsl.lightness) }
     val alpha = rememberSaveable { mutableFloatStateOf(lastSelectedColor.alpha) }
 
-    val colorHex = remember { mutableStateOf(TextFieldValue("")) }
-
-    // Derived state for the color based on RGBA values
+    // Derived state for the color based on HSL-A values
     val color by remember {
         derivedStateOf {
             Color.hsl(hue = hue.floatValue, saturation = saturation.floatValue, lightness = lightness.floatValue, alpha.floatValue)
@@ -68,7 +63,6 @@ fun HSLAColorPicker(
 
     // Launch an effect to invoke the provided callback with the selected color
     LaunchedEffect(color) {
-        colorHex.value = TextFieldValue(ColorUtil.getHex(color = color))
         onColorSelected.invoke(color)
     }
 

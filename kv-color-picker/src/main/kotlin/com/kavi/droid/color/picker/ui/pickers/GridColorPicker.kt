@@ -23,17 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kavi.droid.color.palette.color.MatPackage
-import com.kavi.droid.color.palette.util.ColorUtil
 import com.kavi.droid.color.picker.R
 import com.kavi.droid.color.picker.ui.common.ColorColum
 
 /**
- * A composable function that creates a grid grid to select colors. This color grid is created with
+ * A composable function that creates a grid to select colors. This color grid is created with
  * 16 predefined major colors and those color's 10 color variances.
  *
  * @param modifier: Modifier: The modifier to apply to this layout.
@@ -51,11 +49,9 @@ fun GridColorPicker(
 ) {
 
     var selectedColor by remember { mutableStateOf(lastSelectedColor) }
-    val colorHex = remember { mutableStateOf(TextFieldValue(ColorUtil.getHex(lastSelectedColor))) }
 
     val onSelectColor: (color: Color) -> Unit = {
         selectedColor = it
-        colorHex.value = TextFieldValue(ColorUtil.getHex(it))
     }
 
     // Launch an effect to invoke the provided callback with the selected color
