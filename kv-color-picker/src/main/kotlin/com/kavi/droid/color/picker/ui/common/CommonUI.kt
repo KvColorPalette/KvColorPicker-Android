@@ -21,7 +21,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -59,7 +58,7 @@ import com.kavi.droid.color.picker.R
 @Composable
 internal fun ColorSlider(colorLabel: String, colorValueState: MutableState<Float>, color: Color) {
 
-    val sliderValue = remember { mutableStateOf(TextFieldValue("0")) }
+    val sliderValue = remember { mutableStateOf(TextFieldValue(toColorRange(colorValueState.value).toString())) }
 
     /**
      * Displays a slider for adjusting the given [colorValueState] associated with the provided [colorLabel].
