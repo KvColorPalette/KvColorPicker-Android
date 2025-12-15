@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -62,6 +64,7 @@ fun KvColorPickerBottomSheet(
     showSheet: MutableState<Boolean>,
     sheetState: SheetState,
     onColorSelected: (selectedColor: Color) -> Unit) {
+    val scrollState = rememberScrollState()
     ModalBottomSheet (
         onDismissRequest = {
             showSheet.value = false
@@ -70,7 +73,10 @@ fun KvColorPickerBottomSheet(
         containerColor = MaterialTheme.colorScheme.background,
         scrimColor = MaterialTheme.colorScheme.onSurface.copy(alpha = .5f)
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .verticalScroll(scrollState)
+        ) {
             var selectedColor by remember { mutableStateOf(lastSelectedColor) }
             val colorHex = remember { mutableStateOf(TextFieldValue("#000000")) }
             var tabIndex by remember { mutableIntStateOf(0) }
